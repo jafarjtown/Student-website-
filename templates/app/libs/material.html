@@ -1,0 +1,29 @@
+<div class="material">
+        <div class="material-card">
+            <div class="material-info">
+                <p class="material-title">{{ material.title }}</p>
+                <p>Code: {{ material.code }}</p>
+                <p>Size: {{ material.size }}</p>
+                
+            </div>
+            <div>
+                <p>
+            <a class="download-button" href="{{ material.file.url }}" download>Download</a>
+            </p>
+            <br>
+            <p>
+            <a class="download-button" href="{{ material.file.url }}">View</a>
+            </p>
+            </div>
+        </div>
+        <details>
+                   <p>
+                      {% if material.comment %} {{material.comment}}
+                      {% else %}
+                      No comment provided
+                      {% endif %}
+                       </p>
+                   <hr>
+                   <p><b>Note</b>, Above is a comment written by who shared the material or Administrator</p>
+                </details>
+        </div>

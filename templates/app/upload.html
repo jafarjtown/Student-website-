@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+{% endblock css %}
+{% block content %}
+
+<div class="form-div">
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <label> Department:
+            <select name="department">
+                <option>--Select Department--</option>
+                <option value="pols">Political Science</option>
+                <option value="mascom">Mass Communication</option>
+                <option value="solg">Sociology</option>
+            </select>
+            </label>
+            <label> Level:
+            <select name="level">
+                <option>--Select Level--</option>
+                <option value="100">100 Level</option>
+                <option value="200">200 Level</option>
+                <option value="300">300 Level</option>
+                <option value="400">400 Level</option>
+                <option value="000">General </option>
+            </select>
+            </label>
+        </div>
+        <div>
+            <label> Course Code:
+            <input type="text" name="code" placeholder="POLS101" required>
+            </label>
+            <label> Course Title:
+            <input type="text" name="title" placeholder="Introduction to political science" required>
+            </label>
+        </div>
+        <div>
+            <label> Comment:
+            <textarea name="comment" placeholder="( optional )"></textarea></label>
+        </div>
+        <div>
+            <label> File:
+            <input type="file" name="file" required></label>
+        </div>
+        <p style="background: white;color: black;"><b>Note : </b>any material that's not relevant will be removed by Administrators</p>
+        <div><button class="submit-btn">Submit</button></div>
+        
+        
+    </form>
+    
+</div>
+
+{% endblock content %}

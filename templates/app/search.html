@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="form-div">
+        <h1>Search Materials</h1>
+    </div>
+
+
+    <div>
+         {% for material in materials %}
+        {% include 'app/libs/material.html' with material=material %}
+          {% empty %}
+         <p>Sorry, there's no any documents at the moment</p>
+         <p>Click below to add</p>
+         <a href="{% url "upload" %}">Add for the community</a>
+        {% endfor %}
+    </div>
+
+{% endblock %}

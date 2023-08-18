@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Web App Title</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <script>
+        function toggleNav() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('show');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="nav-links">
+            
+            <div>
+                <button class="toggle-button" onclick="toggleNav()">x</button>
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="{% url "material_list" %}">Materials</a>
+            <a class="nav-link" href="{% url "upload" %}">Upload</a>
+            <a href="#" class="nav-link" disabled>Time tables</a>
+            <a href="#" class="nav-link" disabled>Courses info</a>
+            <a href="#" class="nav-link">Blog site</a>
+            <a href="#" class="nav-link" disabled>Events</a>
+            </div>
+            
+        </div>
+        <div class="search">
+            <form action="{% url "search" %}">
+            <input type="text" placeholder="Search" name="q" value="{{q}}">
+            <button>Search</button>
+            </form>
+        </div>
+        <button class="toggle-button" onclick="toggleNav()">☰</button>
+    </header>
+    <main>
+        
+        {% block content %}
+        {% endblock content %}
+    </main>
+    <footer>
+        Sponsored by NASSS and created by Tesla
+    </footer>
+</body>
+</html>

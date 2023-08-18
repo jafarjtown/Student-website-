@@ -1,0 +1,242 @@
+body, h1, h2, h3, p {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        main{
+            padding: 5px;
+        }
+        p{
+           /*background-color: #ffffff;*/
+            padding: 5px;
+            color: black;
+            border-radius: 3px;
+        }
+        body {
+            background-color: lightgray;
+            
+        }
+        /* Facebook-like header */
+        header {
+            background-color: #1877f2; /* Facebook blue color */
+            color: white;
+            padding:20px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 5px;
+            position: relative;
+            
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px;
+            background-color: #3b00ffd0;
+            margin: 3px auto;
+            width: 70%;
+            border-radius: 4px;
+        }
+        .search {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          
+           
+        }
+        .search input[type="text"] {
+            padding: 5px 10px;
+            /*font-size: 20px;*/
+            outline: none;
+            border-radius: 4px;
+            border: none;
+            
+            
+        }
+        .search form{
+           
+            display: flex;
+        }
+        .search button {
+            padding: 5px 10px;
+            background-color: #1877f2; /* Facebook blue color */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-links.show{
+        	display: block;
+        	position: fixed;
+         top: 0;
+         left: 0;
+         height: 100vh;
+         width: 100%;
+        	background-color:#ffffffa3 ;
+        	}
+        	.nav-links.show > div{
+        	    display: flex;
+        	flex-direction: column;
+        	    padding: 10px 10px;
+        	    width: 50%;
+        	    height: 100%;
+        	    background-color: #1877f2;
+        	}
+        	.toggle-button{
+        	    display: none;
+        	    font-size: 20px;
+        	}
+        /* Mobile navigation */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .toggle-button {
+                display: block;
+                margin-left: auto;
+                padding: 5px 10px;
+                background-color: #1877f2; /* Facebook blue color */
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+            .hero div.br{
+                flex-direction: column;
+            }
+        }
+
+.hero{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.hero > div{
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-around;
+   
+    width: 100%;
+}
+.hero div.nbr{
+display: flex;
+justify-content: space-between;
+    flex-direction: row;
+}
+.hero > div > p{
+    height: 100%;
+    flex: 1;
+}
+.hero > div:nth-child(even){
+    background-color: white;
+     border: .5px solid gray;
+}
+.hero figure {
+    width: 50%;
+    margin: 0;
+}
+.hero img{ 
+    width: 100%;
+    object-fit: contain;
+}
+.button-links {
+    display: flex;
+    
+}
+.button-links a {
+    padding: 10px;
+    color: white;
+    background-color: #1877f2;
+    text-decoration: none;
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    border-radius: 5px;
+    
+}
+
+footer{
+    padding: 5px 10px;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.form-div{
+    width: 100%;
+}
+.form-div form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap:5px;
+    max-width: 400px;
+}
+.form-div form div{
+    display: flex;
+    gap:10px;
+}
+.form-div label{
+    display: flex;
+    flex-direction: column;
+   flex: 1;
+   gap: 5px;
+}
+.form-div label *{
+    padding: 5px;
+    outline: none;
+}
+.form-div input{
+    width: 80%;
+}
+.form-div textarea{
+    height: 100px;
+}
+.form-div .submit-btn{
+    width: 100%;
+    padding: 10px;
+    background-color: lightblue;
+    color: black;
+    border: none;
+}
+        
+        .material-card {
+            display: flex;
+            align-items: flex-start;
+            
+        }
+        .material {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+        }
+        .material p{
+            background-color: white;
+            color: black;
+        }
+        .material-info {
+            flex: 1;
+        }
+        .material-title {
+            font-weight: bold;
+        }
+        .download-button {
+            margin-left: auto;
+            padding: 5px 10px;
+            background-color: #1877f2;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }

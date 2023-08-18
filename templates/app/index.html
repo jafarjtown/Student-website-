@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+{% endblock css %}
+{% block content %}
+
+<div class="hero">
+    <div class="br">
+    
+        <h1>Welcome to SITENAME</h1>
+    
+        <p>Need a reading materials? worry no more, you are at the right place.</p>
+    </div>
+    <div>
+    
+        <p>You may ask, is it free? YES, its free my dear, it is sponsored by NASSS under the leadership of Jagaban for you and it's going to remained free forever!!</p>
+        <figure>
+        <img src="{% static "imgs/logo.jpg"%}" alt="">
+        <figcaption>Jagaban</figcaption>
+        </figure>
+        </div>
+    
+    <div class="br">
+        <p>You can get different kinds of materials here from pdfs to videos, handout, pass questions, useful or relevant resources and more all made available for you by the community</p>
+    </div>
+    <div class="nbr">
+            <div>There's up to 
+                <h1>10,000 +</h1> materials on this site
+            </div>
+            <div>
+                With <h1>5,000 +</h1> downloads
+            </div>
+    </div>
+    <div class="button-links">
+    
+    <p>
+      You have a useful soft copy of handout, pass questions or other important materials? you can also contribute in making this platform more helpful to we the students. Click on below button to Contribute 
+    </p>
+    
+        
+    
+    <a href="{% url "upload" %}">Contribute</a>
+    
+    </div>
+</div>
+
+{% endblock content %}
