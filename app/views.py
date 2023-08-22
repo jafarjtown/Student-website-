@@ -1,39 +1,32 @@
 # app/views.py
 from django.shortcuts import render,redirect
-from .models import Material
+from django.http import JsonResponse 
+from .models import Material, Department , Course, TimeTable
 
 def index(request):
     return render(request, 'app/index.html')
     
 def upload(request):
-
+    context = {
+            "departments": Department.objects.all()
+    }
     if request.method == 'POST':
-        # Retrieve material properties from the request body
-        code = request.POST.get('code')
-        title = request.POST.get('title')
+        course = request.POST.get('course')
         comment = request.POST.get('comment')
         department = request.POST.get('department')
-        level = request.POST.get('level')
         file = request.FILES.get('file')
 
-        # Create a new Material instance and save it to the database
-        material = Material(code=code, title=title, comment=comment, department=department, level=level, file=file)
+        course = Course.objects.get(department__id = department, code = course)
+        
+        material = Material(course=course, comment=comment, file=file)
         material.save()
 
-        # Redirect to the home page or any other desired URL
-        return redirect('index')  # Replace 'index' with the appropriate URL name
 
-    return render(request, 'app/upload.html')
+    return render(request, 'app/upload.html', context)
 
 
 def material_list(request):
-    d = {
-        "0": "All",
-        "solg": "Sociology",
-        "mascom":"Mass Communication",
-        "pols":"Political Science",
-        "ints": "International Studies"
-    }
+    departments = Department.objects.all()
     department_query = request.GET.get('department')
     level_query = request.GET.get('level')
     if department_query == "0":
@@ -41,33 +34,56 @@ def material_list(request):
     if level_query == "000":
         level_query = None
     if department_query  and level_query:
-        materials = Material.objects.filter(department=department_query, level=level_query)
+        materials = Material.objects.select_related("course").filter(course__department__name=department_query,course__code__icontains=level_query[0])
     elif department_query:
-        materials = Material.objects.filter(department=department_query)
+        materials = Material.objects.select_related("course").filter(course__department__name=department_query)
     elif level_query:
-        materials = Material.objects.filter(level=level_query)
+        materials = Material.objects.select_related("course").filter(course__code__icontains=level_query[0])
     else:
-        materials = Material.objects.all()
+        materials = Material.objects.select_related("course").all()
 
-    return render(request, 'app/list.html', {'materials': materials, "department": d.get(department_query), "level": level_query})
+    return render(request, 'app/list.html', {'materials': materials, "department": department_query, "level": level_query, "departments": departments})
 
 
 def search_materials(request):
     search_query = request.GET.get('q')
 
     if search_query:
-        materials = Material.objects.filter(code__icontains=search_query) | \
-                    Material.objects.filter(title__icontains=search_query)
+        materials = Material.objects.select_related("course").filter(course__code__icontains=search_query) | \
+                    Material.objects.select_related("course").filter(course__title__icontains=search_query)
     else:
         materials = Material.objects.all()
 
     return render(request, 'app/search.html', {'materials': materials, "q": search_query})
-# app/views.py
-#from django.shortcuts import render
-#from .models import Material
-#from .filters import MaterialFilter
 
-#def search_materials(request):
-#    search_query = request.GET.get('q')
-#    material_filter = MaterialFilter(request.GET, queryset=Material.objects.all())
-#    return render(request, 'app/search.html', {'filter': material_filter, "q": search_query})
+
+def courses_api(request, dep, lev):
+    department = Department.objects.get(id = dep)
+    courses = department.course_set.filter(code__gte=lev)
+    courses = courses.filter(code__lt=(lev+100)).values("code", "title")
+    
+    return JsonResponse({"data": tuple(courses)})
+
+def timetable_view(request):
+    timetables = TimeTable.objects.all()
+    return render(request , "app/timetable_view.html", {"timetables": timetables })
+
+
+def timetable(request, id):
+    time_table = TimeTable.objects.get(id = id)
+    return render(request, "app/timetable.html", {"timetable": time_table})
+    
+    
+def courses(request):
+    context = {"departments": Department.objects.all(), "levels":[100, 200,300,400]}
+    if request.GET.get("department") and request.GET.get("course"):
+        department = request.GET.get("department")
+        level = request.GET.get("level")
+        course = request.GET.get("course")
+        
+        dep = Department.objects.prefetch_related("course_set").get(id = department)
+        course = dep.course_set.get(code = course)
+        context["course"] = course 
+        context["level"] = int(level)
+        context["department"] = dep.id
+    return render(request, "app/course.html", context)

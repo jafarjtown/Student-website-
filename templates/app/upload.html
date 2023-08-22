@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
-{% block css %}
-<link rel="stylesheet" href="{% static "css/style.css" %}">
-{% endblock css %}
+{% block script %}
+<script src="{% static "js/script.js" %}" defer></script>
+{% endblock script %}
 {% block content %}
 
 <div class="form-div">
@@ -11,15 +11,15 @@
         {% csrf_token %}
         <div>
             <label> Department:
-            <select name="department">
+            <select name="department" department>
                 <option>--Select Department--</option>
-                <option value="pols">Political Science</option>
-                <option value="mascom">Mass Communication</option>
-                <option value="solg">Sociology</option>
+                {% for d in departments %}
+                <option value="{{d.id}}">{{d.name}}</option>
+           {% endfor %}
             </select>
             </label>
             <label> Level:
-            <select name="level">
+            <select level>
                 <option>--Select Level--</option>
                 <option value="100">100 Level</option>
                 <option value="200">200 Level</option>
@@ -30,14 +30,14 @@
             </label>
         </div>
         <div>
-            <label> Course Code:
-            <input type="text" name="code" placeholder="POLS101" required>
+            <label> Course :
+            <select name="course" course>
+                <option>--Select Course--</option>
+            </select>
             </label>
-            <label> Course Title:
-            <input type="text" name="title" placeholder="Introduction to political science" required>
-            </label>
+            
         </div>
-        <div>
+       <div>
             <label> Comment:
             <textarea name="comment" placeholder="( optional )"></textarea></label>
         </div>

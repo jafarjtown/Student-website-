@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block script %}
+<script defer>
+    const level = document.querySelector("[level]")
+const department = document.querySelector("[department]")
+const course = document.querySelector("[course]");
+
+(()=>{
+    if(Number(level.value)) getCourse()
+})()
+
+
+level.addEventListener("change", getCourse) 
+
+async function getCourse(){
+        let defaultOption = document.createElement("option")
+        defaultOption.innerText = "--Select Course--"
+        course.innerHTML=""
+        course.appendChild(defaultOption)
+    // fetch all courses in the level 
+    
+    const response = await fetch(`/api/courses/${department.value}/${level.value}`)
+    const data = await response.json()
+    for (let d of data.data ) {
+        let option = document.createElement("option")
+        option.innerText = d.code +" - "+d.title
+        option.value = d.code
+        course.appendChild(option)
+    }
+}
+</script>
+
+{% endblock script %}
+
+{% block content %}
+
+<div class="form-div">
+        <form>
+        {% csrf_token %}
+        <div>
+            <label> Department:
+            <select name="department" department>
+                <option>--Select Department--</option>
+                {% for d in departments %}
+                <option value="{{d.id}}" {% if d.id == department %}
+                selected
+                {% endif %} >{{d.name}}</option>
+           {% endfor %}
+            </select>
+            </label>
+            <label> Level:
+            <select name="level" level>
+                <option>--Select Level--</option>
+                {% for l in levels %}
+                <option value="{{l}}" {% if l == level %}selected
+                {% endif %}>{{l}} Level</option>
+               {% endfor %}
+            </select>
+            </label>
+        </div>
+        <div>
+            <label> Course :
+            <select name="course" course>
+                <option>--Select Course--</option>
+            </select>
+            </label>
+            
+        </div>
+         <div>
+             <button class="submit-btn">Get Info</button></div>
+        
+        
+    </form>
+ 
+    {% if course %}
+    <h2>Title : {{course.title}}</h2>
+    <h3>Code : {{course.code}}</h3>
+    <p> Information about the course <br>{{course.info}}</p>
+    <p>Number of available materials :{{course.material_set.count}} | <a href="{{course.get_absolute_url}}">Check out</a></p>
+    <p>
+        {% if course.outline %}
+        <a href="">Click to download course outline</a>
+        {% else %}
+        <b>Course outline not available</b> | <a href="">Click to add</a>
+        {% endif %}
+    </p>
+    <hr>
+    <p><b>Note:</b> anyone can flag an issue if you found anything that's not alright concerning the above course | <a href="">Flag issue</a></p>
+      <hr>
+    {% include "app/libs/comments.html" %}
+    {% else %}
+    <p>Select Course from above to see the details about it.</p>
+    {% endif %}
+  
+</div>
+
+
+{% endblock content%}

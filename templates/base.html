@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Web App Title</title>
     <link rel="stylesheet" href="{% static "css/style.css" %}">
+   
     <script>
         function toggleNav() {
             const navLinks = document.querySelector('.nav-links');
@@ -23,7 +24,7 @@
             <a class="nav-link" href="{% url "material_list" %}">Materials</a>
             <a class="nav-link" href="{% url "upload" %}">Upload</a>
             <a href="#" class="nav-link" disabled>Time tables</a>
-            <a href="#" class="nav-link" disabled>Courses info</a>
+            <a href="{% url "course" %}" class="nav-link">Courses info</a>
             <a href="#" class="nav-link">Blog site</a>
             <a href="#" class="nav-link" disabled>Events</a>
             </div>
@@ -45,5 +46,7 @@
     <footer>
         Sponsored by NASSS and created by Tesla
     </footer>
+     {% block script %}
+    {% endblock script %}
 </body>
 </html>

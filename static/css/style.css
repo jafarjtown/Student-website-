@@ -240,3 +240,22 @@ footer{
             border: none;
             cursor: pointer;
         }
+
+.comments{
+    display: flex;
+    flex-direction: column;
+}
+.comments-form{
+    display: flex;
+    flex-direction: column;
+}
+.comments-form label{
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
+.comments-form label *{
+
+    padding: 5px 10px;
+    border: 1px solid gray;
+}

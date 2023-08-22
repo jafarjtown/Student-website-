@@ -7,18 +7,36 @@
             <label> Department:
             <select name="department" value="{{department}}">
                 <option value="0">--Select Department--</option>
-                <option value="pols">Political Science</option>
-                <option value="mascom">Mass Communication</option>
-                <option value="solg">Sociology</option>
+                {% for d in departments %}
+                <option value="{{d.name}}" 
+                {% if d.name == department %}
+                selected
+                {% endif %}
+                >{{d.name}}</option>
+                {% endfor %}
             </select>
             </label>
             <label> Level:
             <select name="level" value="{{level}}">
                 <option value="000">--Select Level--</option>
-                <option value="100">100 Level</option>
-                <option value="200">200 Level</option>
-                <option value="300">300 Level</option>
-                <option value="400">400 Level</option>
+                <option value="100"
+                {% if level == "100" %}
+                selected
+                {% endif %}>100 Level</option>
+                <option value="200"
+                {% if level == "200" %}
+                selected
+                {% endif %}>200 Level</option>
+                <option value="300"
+                {% if level == "300" %}
+                selected
+                {% endif %}
+                >300 Level</option>
+                <option value="400"
+                {% if level == "400" %}
+                selected
+                {% endif %}
+                >400 Level</option>
                 <option value="000">General </option>
             </select>
             </label>
