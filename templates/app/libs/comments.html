@@ -1,17 +1,30 @@
-<div class="comments">
-    <form class="comments-form">
+<div class="comments form-div">
+    <form class="comments-form" method="post">
+        {% csrf_token %}
         <h3>Comment section</h3>
       
             <label>
                 name
-                <input type="text" placeholder="Optional" name="name">
+                <input type="text" placeholder="Optional" name="user">
             </label>
             <label>
                 comment
-                <textarea></textarea>
+                <textarea rows="5" name="comment"></textarea>
             </label>
             
-            <button>Comment</button>
+            <button class="submit-btn">Comment</button>
     </form>
     
+    
 </div>
+<section>
+    {% for comment in course.comments_set %}
+    <h4>{{comment.user}}</h4>
+    <p>{{comment.comment}}</p>
+    <div class="hr"></div>
+    {% if forloop.counter == 10 %}
+    <a href="">load more</a>
+    {% endif %}
+    {% endfor %}
+
+</section>

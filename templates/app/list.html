@@ -1,71 +1,25 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div class="form-div">
-        <form>
-             <div>
-            <label> Department:
-            <select name="department" value="{{department}}">
-                <option value="0">--Select Department--</option>
-                {% for d in departments %}
-                <option value="{{d.name}}" 
-                {% if d.name == department %}
-                selected
-                {% endif %}
-                >{{d.name}}</option>
-                {% endfor %}
-            </select>
-            </label>
-            <label> Level:
-            <select name="level" value="{{level}}">
-                <option value="000">--Select Level--</option>
-                <option value="100"
-                {% if level == "100" %}
-                selected
-                {% endif %}>100 Level</option>
-                <option value="200"
-                {% if level == "200" %}
-                selected
-                {% endif %}>200 Level</option>
-                <option value="300"
-                {% if level == "300" %}
-                selected
-                {% endif %}
-                >300 Level</option>
-                <option value="400"
-                {% if level == "400" %}
-                selected
-                {% endif %}
-                >400 Level</option>
-                <option value="000">General </option>
-            </select>
-            </label>
-        </div>
-        <div>
-            <button style="padding: 10px">Filter</button>
-        </div>
-        </form>
-    </div>
 
-    {% if department %}
-        <h2>{{department}} - 
-        {% if level == "000" %}
-        General Materials
-        {% else %}
-        {{level}}
-        {% endif %}
-        </h2>
+{% include "app/libs/filter.html" with department=department departments=departments levels=levels btn="Filter" %}
+<section>
+    {% if course %}
+        <h3>{{course.code}}</h3>
+        <h4>{{course.title}}</h4>
     {% else %}
-    <h2>All Documents </h2>
+    <h3>All Documents </h3>
     {% endif %}
     <div>
         {% for material in materials %}
-         {% include 'app/libs/material.html' with material=material %}
+        
+        {% include "app/libs/material.html" with material=material %}
+        
          {% empty %}
          <p>Sorry, there's no any documents at the moment</p>
          <p>Click below to add</p>
          <a href="{% url "upload" %}">Add for the community</a>
         {% endfor %}
     </div>
-
+</section>
 {% endblock %}

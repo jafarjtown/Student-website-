@@ -1,110 +1,96 @@
-body, h1, h2, h3, p {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-        main{
-            padding: 5px;
-        }
-        p{
-           /*background-color: #ffffff;*/
-            padding: 5px;
-            color: black;
-            border-radius: 3px;
-        }
-        body {
-            background-color: lightgray;
-            
-        }
-        /* Facebook-like header */
-        header {
-            background-color: #1877f2; /* Facebook blue color */
-            color: white;
-            padding:20px 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            gap: 5px;
-            position: relative;
-            
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 10px;
-            background-color: #3b00ffd0;
-            margin: 3px auto;
-            width: 70%;
-            border-radius: 4px;
-        }
-        .search {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-          
-           
-        }
-        .search input[type="text"] {
-            padding: 5px 10px;
-            /*font-size: 20px;*/
-            outline: none;
-            border-radius: 4px;
-            border: none;
-            
-            
-        }
-        .search form{
-           
-            display: flex;
-        }
-        .search button {
-            padding: 5px 10px;
-            background-color: #1877f2; /* Facebook blue color */
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .nav-links.show{
-        	display: block;
-        	position: fixed;
-         top: 0;
-         left: 0;
-         height: 100vh;
-         width: 100%;
-        	background-color:#ffffffa3 ;
-        	}
-        	.nav-links.show > div{
-        	    display: flex;
-        	flex-direction: column;
-        	    padding: 10px 10px;
-        	    width: 50%;
-        	    height: 100%;
-        	    background-color: #1877f2;
-        	}
-        	.toggle-button{
-        	    display: none;
-        	    font-size: 20px;
-        	}
+*{
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+:root{
+    --primary-color: #55acff;
+}
+
+a{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    
+}
+p{
+    margin: 5px 0;
+}
+header{
+    display: flex;
+    flex-direction: column;
+    padding: 15px 10px 5px 10px;
+    gap: 5px;
+    border-bottom: .5px solid lightgray;
+}
+header > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header nav.hidden{
+    display: none;
+}
+header .hamburger{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    background-color: var(--primary-color);
+    height: fit-content;
+    border-radius: 3px;
+}
+header .hamburger span{
+    width: 30px;
+    height: 5px;
+    background-color: white;
+}
+header > a{
+    padding: 10px;
+    background-color: var(--primary-color);
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+header nav{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #d9d9d9b8;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.nav{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    height: 100%;
+    width: 50%;
+    position: relative;
+    right: 0;
+    gap: 10px;
+    padding: 5px;
+}
+.nav a{
+    font-weight: bold;
+    color: black;
+    font-size: 23px;
+    border: .5px solid lightgray;
+    padding: 10px;
+    border-radius: 4px;
+    background: white;
+}
         /* Mobile navigation */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .toggle-button {
-                display: block;
-                margin-left: auto;
-                padding: 5px 10px;
-                background-color: #1877f2; /* Facebook blue color */
-                color: white;
-                border: none;
-                cursor: pointer;
-            }
+            .,
             .hero div.br{
                 flex-direction: column;
             }
@@ -164,98 +150,98 @@ justify-content: space-between;
 }
 
 footer{
-    padding: 5px 10px;
-    background-color: black;
-    color: white;
-    text-align: center;
+    border-top: .5px solid lightgray;
+    padding-top: 20px;
+    
 }
-
+footer a{
+    background-color: white;
+    color: black;
+    padding: 0;
+    font-weight: 400;
+}
+footer >*{
+    padding: 0 10px;
+}
+footer ul{
+    display: block;
+    padding: 5px 10px;
+    
+}
+footer li{
+    margin-left: 15px;
+    margin-top: 5px;
+}
+footer .form-div label{
+    flex-direction: row;
+    
+}
+.hr{
+    height: .1px;
+    background: lightgray;
+    margin: 5px 0;
+}
 .form-div{
-    width: 100%;
+    padding: 10px;
 }
 .form-div form{
     display: flex;
     flex-direction: column;
-    width: 100%;
     gap:5px;
     max-width: 400px;
+    gap: 5px;
 }
-.form-div form div{
-    display: flex;
-    gap:10px;
-}
-.form-div label{
-    display: flex;
-    flex-direction: column;
-   flex: 1;
-   gap: 5px;
-}
-.form-div label *{
-    padding: 5px;
-    outline: none;
-}
-.form-div input{
-    width: 80%;
-}
-.form-div textarea{
-    height: 100px;
-}
-.form-div .submit-btn{
-    width: 100%;
-    padding: 10px;
-    background-color: lightblue;
-    color: black;
-    border: none;
-}
-        
-        .material-card {
-            display: flex;
-            align-items: flex-start;
-            
-        }
-        .material {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 10px;
-            display: flex;
-            flex-direction: column;
-            background-color: white;
-        }
-        .material p{
-            background-color: white;
-            color: black;
-        }
-        .material-info {
-            flex: 1;
-        }
-        .material-title {
-            font-weight: bold;
-        }
-        .download-button {
-            margin-left: auto;
-            padding: 5px 10px;
-            background-color: #1877f2;
-            color: white;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-        }
-
-.comments{
-    display: flex;
-    flex-direction: column;
-}
-.comments-form{
-    display: flex;
-    flex-direction: column;
-}
-.comments-form label{
-    width: 100%;
+.form-div form > div{
     display: flex;
     gap: 5px;
 }
-.comments-form label *{
-
-    padding: 5px 10px;
-    border: 1px solid gray;
+.form-div label{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
+
+.form-div select, .form-div textarea, .form-div input{
+    padding: 10px;
+    border: .5px solid lightgray;
+    border-radius: 4px;
+    outline: none;
+    font-size: 10px;
+    background: white;
+    resize: none;
+    flex: 1;
+}
+.form-div textarea{
+    height: 100px;
+    resize: none;
+}
+.form-div .submit-btn{
+    min-width: 100px;
+    padding: 10px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+
+section{
+    padding: 10px;
+}
+section p{
+    margin: 5px 0;
+}
+
+  .material-card {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 5px;
+            
+        }
+        .material {
+            border: .5px solid lightgray;
+            border-radius: 4px;
+            padding: 10px;
+    }

@@ -50,6 +50,9 @@ class Course(models.Model):
     outline = models.FileField(upload_to="courses/outlines/")
     department = models.ForeignKey("Department", on_delete=models.CASCADE)
     
+    def comments_set(self):
+        return self.comments.all().order_by("-posted_on")[:10]
+    
     
 class Outline(models.Model):
     lecturer = models.TextField()
@@ -75,3 +78,9 @@ class Blog(BlogBase):
 class Comment(BlogBase):
     blog = models.ForeignKey("Blog", on_delete = models.CASCADE)
     reply = models.ManyToManyField("Comment", blank=True)
+
+class CourseComment(models.Model):
+    user = models.CharField(max_length=20)
+    comment = models.TextField()
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="comments")
+    posted_on = models.DateTimeField(auto_now_add=True)

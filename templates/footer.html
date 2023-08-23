@@ -1,0 +1,36 @@
+<footer>
+    <h2>Archive</h2>
+    <p>{% lorem 5 w %} </p>
+    <div class="hr"></div>
+    <h4>Useful links</h4>
+    <ul>
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="{% url "material_list" %}">Materials</a>
+        </li>
+        <li>
+            <a href="{% url "upload" %}">Upload</a>
+        </li>
+        <li>
+            <a href="{% url "search" %}">Search</a>
+        </li>
+    </ul>
+    <div class="hr"></div>
+    <div class="form-div">
+        <p>Register for our Newsletter </p>
+        <form method="post" action="/">
+            {% csrf_token %}
+            <label>
+                
+                <input type="email" name="email" placeholder="Email" required>
+                <button class="submit-btn">submit</button>
+            </label>
+        </form>
+    </div>
+    <p>{% lorem 10 w %} </p>
+    <div class="hr"></div>
+    <p>2023 copyright</p>
+    
+</footer>

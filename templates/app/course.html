@@ -35,65 +35,31 @@ async function getCourse(){
 
 {% block content %}
 
-<div class="form-div">
-        <form>
-        {% csrf_token %}
-        <div>
-            <label> Department:
-            <select name="department" department>
-                <option>--Select Department--</option>
-                {% for d in departments %}
-                <option value="{{d.id}}" {% if d.id == department %}
-                selected
-                {% endif %} >{{d.name}}</option>
-           {% endfor %}
-            </select>
-            </label>
-            <label> Level:
-            <select name="level" level>
-                <option>--Select Level--</option>
-                {% for l in levels %}
-                <option value="{{l}}" {% if l == level %}selected
-                {% endif %}>{{l}} Level</option>
-               {% endfor %}
-            </select>
-            </label>
-        </div>
-        <div>
-            <label> Course :
-            <select name="course" course>
-                <option>--Select Course--</option>
-            </select>
-            </label>
-            
-        </div>
-         <div>
-             <button class="submit-btn">Get Info</button></div>
-        
-        
-    </form>
- 
+{% include "app/libs/filter.html" %}
+<section>
     {% if course %}
     <h2>Title : {{course.title}}</h2>
     <h3>Code : {{course.code}}</h3>
-    <p> Information about the course <br>{{course.info}}</p>
-    <p>Number of available materials :{{course.material_set.count}} | <a href="{{course.get_absolute_url}}">Check out</a></p>
+    <p>{{course.info}}</p>
+    <div class="hr"></div>
+    <p>Materials :{{course.material_set.count}} <a href="{% url "material_list" %}?department={{course.department.id}}&course={{course.code}}">Check out</a></p>
+
     <p>
         {% if course.outline %}
-        <a href="">Click to download course outline</a>
+        <a href="{% url "course.outlone.url" %}" download="{{course.title}} {{course.code}} outline">Click to download course outline</a>
         {% else %}
-        <b>Course outline not available</b> | <a href="">Click to add</a>
+        Course outline not available  <a href="">Click to add</a>
         {% endif %}
     </p>
-    <hr>
-    <p><b>Note:</b> anyone can flag an issue if you found anything that's not alright concerning the above course | <a href="">Flag issue</a></p>
-      <hr>
-    {% include "app/libs/comments.html" %}
+    <div class="hr"></div>
+    <p><b>Note:</b> anyone can flag an issue if you found anything that's not alright concerning the above course, <a href="">Flag issue</a></p>
+      <div class="hr"></div>
+    {% include "app/libs/comments.html"  with next="courses?" course=course %}
     {% else %}
     <p>Select Course from above to see the details about it.</p>
     {% endif %}
   
-</div>
+</section>
 
 
 {% endblock content%}

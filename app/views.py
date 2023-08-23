@@ -1,7 +1,7 @@
 # app/views.py
 from django.shortcuts import render,redirect
 from django.http import JsonResponse 
-from .models import Material, Department , Course, TimeTable
+from .models import Material, Department , Course, TimeTable, CourseComment 
 
 def index(request):
     return render(request, 'app/index.html')
@@ -27,22 +27,29 @@ def upload(request):
 
 def material_list(request):
     departments = Department.objects.all()
-    department_query = request.GET.get('department')
-    level_query = request.GET.get('level')
-    if department_query == "0":
-        department_query = None
-    if level_query == "000":
-        level_query = None
-    if department_query  and level_query:
-        materials = Material.objects.select_related("course").filter(course__department__name=department_query,course__code__icontains=level_query[0])
-    elif department_query:
-        materials = Material.objects.select_related("course").filter(course__department__name=department_query)
-    elif level_query:
-        materials = Material.objects.select_related("course").filter(course__code__icontains=level_query[0])
-    else:
-        materials = Material.objects.select_related("course").all()
+   
+    levels = [100, 200, 300, 400]
+    
+    context = {"departments":departments}
+    context["levels"] = levels 
+    level = request.GET.get("level")
+#    
+    department_id = request.GET.get("department")
+    course_code = request.GET.get("course")
+#    
+    if department_id and course_code:
+        department = departments.get(id = department_id)
+        course = department.course_set.get(code = course_code)
+        context["course"] = course
+        materials = course.material_set.all()
+    
+        context["materials"] = materials 
+        if level:
+            context["level"] = int(level)
+        context["department"] = department.id
+    
 
-    return render(request, 'app/list.html', {'materials': materials, "department": department_query, "level": level_query, "departments": departments})
+    return render(request, 'app/list.html', context)
 
 
 def search_materials(request):
@@ -75,6 +82,7 @@ def timetable(request, id):
     
     
 def courses(request):
+
     context = {"departments": Department.objects.all(), "levels":[100, 200,300,400]}
     if request.GET.get("department") and request.GET.get("course"):
         department = request.GET.get("department")
@@ -83,7 +91,17 @@ def courses(request):
         
         dep = Department.objects.prefetch_related("course_set").get(id = department)
         course = dep.course_set.get(code = course)
+        if request.method == "POST":
+             user = request.POST.get("user")
+             comment = request.POST.get("comment")
+             if user == "":
+                    user = "Anonymous User"
+             c = CourseComment(user=user, comment=comment, course=course)
+             c.save()
         context["course"] = course 
         context["level"] = int(level)
         context["department"] = dep.id
     return render(request, "app/course.html", context)
+    
+    
+    

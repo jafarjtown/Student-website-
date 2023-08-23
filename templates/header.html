@@ -1,0 +1,26 @@
+<header>
+    <div>
+        <h2>Archive</h2>
+        <div class="hamburger" onclick="toggleNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="hidden" nav>
+           
+            <div class="nav">
+            <div class="hamburger" onclick="toggleNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a href="/">Home</a>
+            <a href="{% url "material_list" %}">Materials</a>
+            <a href="{% url "upload" %}">Upload</a>
+            <a href="{% url "course" %}">Courses</a>
+            <a href="/">Log in</a>
+            </div>
+        </nav>
+    </div>
+    <a href="">Search</a>
+</header>

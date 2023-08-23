@@ -1,0 +1,39 @@
+{% load static %}
+<div class="form-div">
+    <script src="{% static "js/load_courses.js" %}" defer></script>
+        <form>
+        <div>
+            <label> Department:
+            <select name="department" department>
+                <option>--Select Department--</option>
+                {% for d in departments %}
+                <option value="{{d.id}}" {% if d.id == department %}
+                selected
+                {% endif %} >{{d.name}}</option>
+           {% endfor %}
+            </select>
+            </label>
+            <label> Level:
+            <select name="level" level>
+                <option>--Select Level--</option>
+                {% for l in levels %}
+                <option value="{{l}}" {% if l == level %}selected
+                {% endif %}>{{l}} Level</option>
+               {% endfor %}
+            </select>
+            </label>
+        </div>
+        <div>
+            <label> Course :
+            <select name="course" course>
+                <option>--Select Course--</option>
+            </select>
+            </label>
+            
+        </div>
+         <div>
+             <button class="submit-btn">{% if btn %}{{btn}}{% else %} Filter {% endif %}</button></div>
+        
+        
+    </form>
+</div>
