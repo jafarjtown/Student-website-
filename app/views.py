@@ -5,6 +5,8 @@ from .models import Material, Department , Course, TimeTable, CourseComment , Fl
 
 from django.contrib import messages
 
+from .utils import FileComparator
+
 def index(request):
     return render(request, 'app/index.html')
     
@@ -17,12 +19,18 @@ def upload(request):
         comment = request.POST.get('comment')
         department = request.POST.get('department')
         file = request.FILES.get('file')
-
-        course = Course.objects.get(department__id = department, code = course)
         
-        material = Material(course=course, comment=comment, file=file)
-        material.save()
-        messages.success(request, "Material added successful")
+        course = Course.objects.get(department__id = department, code = course)
+        f = FileComparator(file, f"materials/{course.department.name}/{course.code}")
+        print(f.get_file_type(file))
+        if f.is_same:
+            messages.info(request, "Material already exists.")
+        else:
+           
+        
+            material = Material(course=course, comment=comment, file=file)
+            material.save()
+            messages.success(request, "Material added successful")
 
 
     return render(request, 'app/upload.html', context)

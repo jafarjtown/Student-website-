@@ -1,20 +1,30 @@
+{% load static %}
 <div class="material">
         <div class="material-card">
             <div class="material-info">
-                <p class="material-title">{{ material.title }}</p>
-                <p>Depart.: {{ material.department.name|truncatechars:8 }}</p>
-                <p>Code: {{ material.code }}</p>
-               
+                <img src="/static/imgs/{{material.type}}.png" alt="" loading="lazy"></img>
                 
+                <div class="info">
+                    <span class="material-title">
+                   {{ material.tite }}</span>
+                     <span> 
+           {{ material.department.name|truncatechars:15 }}
+                    </span>
+                    <span>
+                    {{ material.code }}
+                    </span>
+               
+                </div>
             </div>
-            <div>
-                <p>
-            <a class="download-button" href="{{ material.file.url }}" download>Download</a>
-            </p>
-            <br>
-            <p>
+            
+            <div class="btns">
+               
+            <a href="{{ material.file.url }}" download><img src="{% static "imgs/download.png" %}" alt="download" loading="lazy"/></a>
+            
+           
+            
             <a class="download-button" href="{{ material.file.url }}">View</a>
-            </p>
+            
             </div>
         </div>
         <details>
@@ -25,6 +35,6 @@
                       {% endif %}
                        </p>
                    <hr>
-                   <p><b>Note</b>, Above is a comment written by who shared the material or Administrator</p>
+                   <small><b>Note</b>, Above is a comment written by who shared the material or Administrator</small>
                 </details>
         </div>

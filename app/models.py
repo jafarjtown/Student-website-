@@ -3,6 +3,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+import mimetypes
+def materials_directory_path(instance, filename):
+    
+    return f"materials/{instance.department.name}/{instance.code}/{filename}"
 
 
 class Department(models.Model):
@@ -11,8 +15,24 @@ class Department(models.Model):
 
 class Material(models.Model):
     course = models.ForeignKey("Course", on_delete=models.CASCADE)
-    file = models.FileField(upload_to='materials/')
+    file = models.FileField(upload_to=materials_directory_path)
     comment= models.TextField()
+    
+    @property
+    def type(self):
+        types = {
+                        "audio":["mp3", "mpeg"],
+                        "video":["mp4"],
+                        "pdf":["pdf", "docx"],
+        }
+        mime_type, _ = mimetypes.guess_type(self.file.name)
+        if mime_type:
+            main_type, sub_type = mime_type.split('/')
+            for k, v in types.items():
+                if sub_type in v:
+                    return k
+            return sub_type
+        return "unknown"
     @property
     def code(self):
         return self.course.code
