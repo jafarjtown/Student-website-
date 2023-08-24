@@ -10,7 +10,7 @@
 
 {% block content %}
 
-{% include "app/libs/filter.html" %}
+{% include "app/libs/filter.html" with btn="Get Course"%}
 <section>
     {% if course %}
     <h2>Title : {{course.title}}</h2>

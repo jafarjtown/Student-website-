@@ -97,27 +97,63 @@ header nav{
         }
 
 .hero{
-    height: 350px;
     gap: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url('/static/imgs/hero.jpg');
+    background-position: 0;
+    
 }
-.hero > div{
+.hero > div:first-of-type{
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
 }
-
-
+.hero > div:last-of-type{
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    margin: 5px 10px;
+    width: 90%;
+}
+.hero a{
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+.sec > p{
+    padding-left: 10px;
+    border-left: 3px solid var(--primary-color);
+}
+.sec > h3{
+    border-bottom: 2px solid lightgray;
+    padding-bottom: 5px;
+    width: fit-content;
+}
 footer{
     border-top: .5px solid lightgray;
     padding-top: 20px;
+    background-image: url('/static/imgs/footer.jpg');
+    color: white;
     
 }
-footer a{
-    background-color: white;
+footer > p{
+    background-color: #ffffffc5;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 7px;
     color: black;
+}
+footer a{
+    color: white;
     padding: 0;
-    font-weight: 400;
+    font-weight: 450;
+    text-decoration: underline;
 }
 footer >*{
     padding: 0 10px;
@@ -125,6 +161,7 @@ footer >*{
 footer ul{
     display: block;
     padding: 5px 10px;
+    list-style: none;
     
 }
 footer li{
