@@ -4,17 +4,33 @@
 {% block content %}
     <div class="form-div">
         <h1>Search Materials</h1>
+        <form>
+        <label>
+            <input type="search" name="q">
+            <small>
+                Enter enough information as possible, in other to help us find your desired material'(s)
+            </small>
+        </label>
+        <button class="submit-btn">Search</button>
+        </form>
     </div>
-
-
+<section>
+    {% if course %}
+        <h3>{{course.code}}</h3>
+        <h4>{{course.title}}</h4>
+    {% else %}
+    <h3>All Documents </h3>
+    {% endif %}
     <div>
-         {% for material in materials %}
-        {% include 'app/libs/material.html' with material=material %}
-          {% empty %}
+        {% for material in materials %}
+        
+        {% include "app/libs/material.html" with material=material %}
+        
+         {% empty %}
          <p>Sorry, there's no any documents at the moment</p>
          <p>Click below to add</p>
          <a href="{% url "upload" %}">Add for the community</a>
         {% endfor %}
     </div>
-
+</section>
 {% endblock %}

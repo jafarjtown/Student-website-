@@ -13,5 +13,7 @@ urlpatterns = [
     path("timetables/", views.timetable_view, name="timetables"),
     path("timetables/<int:id>/", views.timetable, name="timetable"),
         path("courses/", views.courses, name="course"),
+        path("courses/<int:cid>/outline", views.upload_outline, name="upload_outline"),
+        path("courses/<int:cid>/flag-issue", views.flag_course, name="flag_course"),
 
 ]

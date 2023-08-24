@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="form-div">
+    <p>Creating a flag issue on Course with the title "{{course.titlw}}" and code of "{{course.code}}"</p>
+    {% if flag_id %}
+    <p>Flag is submitted, <a href="">track</a></p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label>
+            Your complain
+            <textarea name="response" rows="5"></textarea>
+            <small>Please explain in details in other for the administrators to be able to address the issue you flag for.</small>
+        </label>
+        <button class="submit-btn">Flag</button>
+    </form>
+    
+</div>
+
+{% endblock content %}

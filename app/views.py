@@ -1,7 +1,9 @@
 # app/views.py
 from django.shortcuts import render,redirect
 from django.http import JsonResponse 
-from .models import Material, Department , Course, TimeTable, CourseComment 
+from .models import Material, Department , Course, TimeTable, CourseComment , FlaggedIssue
+
+from django.contrib import messages
 
 def index(request):
     return render(request, 'app/index.html')
@@ -20,6 +22,7 @@ def upload(request):
         
         material = Material(course=course, comment=comment, file=file)
         material.save()
+        messages.success(request, "Material added successful")
 
 
     return render(request, 'app/upload.html', context)
@@ -47,7 +50,8 @@ def material_list(request):
         if level:
             context["level"] = int(level)
         context["department"] = department.id
-    
+    else:
+        context["materials"] = Material.objects.all()
 
     return render(request, 'app/list.html', context)
 
@@ -85,7 +89,7 @@ def courses(request):
 
     context = {"departments": Department.objects.all(), "levels":[100, 200,300,400]}
     if request.GET.get("department") and request.GET.get("course"):
-        department = request.GET.get("department")
+        department = int(request.GET.get("department"))
         level = request.GET.get("level")
         course = request.GET.get("course")
         
@@ -98,10 +102,32 @@ def courses(request):
                     user = "Anonymous User"
              c = CourseComment(user=user, comment=comment, course=course)
              c.save()
-        context["course"] = course 
-        context["level"] = int(level)
+        context["course"] = course
+        if level: 
+            context["level"] = int(level)
         context["department"] = dep.id
     return render(request, "app/course.html", context)
     
     
-    
+def upload_outline(request, cid):
+    course = Course.objects.get(id = cid)
+    if request.method == "POST":
+        
+        file = request.FILES.get("outline")
+        course.outline = file
+        course.save()
+        messages.success(request, "Course outline uploaded successful")
+    return render(request, "app/course_outline.html", {"course":course})
+
+def flag_course(request, cid):
+    course = Course.objects.get(id = cid)
+    context = {"course": course}
+    if request.method == "POST":
+        response = request.POST.get("response")
+        
+        issue = FlaggedIssue(response=response, issued_object=course)
+        issue.save()
+        context["flag_id"] = issue.id
+        messages.info(request, "Issue reported successful.")
+        
+    return render(request, "app/flag_course.html", context)

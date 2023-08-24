@@ -1,34 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block script %}
-<script defer>
-    const level = document.querySelector("[level]")
-const department = document.querySelector("[department]")
-const course = document.querySelector("[course]");
-
-(()=>{
-    if(Number(level.value)) getCourse()
-})()
-
-
-level.addEventListener("change", getCourse) 
-
-async function getCourse(){
-        let defaultOption = document.createElement("option")
-        defaultOption.innerText = "--Select Course--"
-        course.innerHTML=""
-        course.appendChild(defaultOption)
-    // fetch all courses in the level 
+<script src="{% static "js/load_courses.js" %}" defer>
     
-    const response = await fetch(`/api/courses/${department.value}/${level.value}`)
-    const data = await response.json()
-    for (let d of data.data ) {
-        let option = document.createElement("option")
-        option.innerText = d.code +" - "+d.title
-        option.value = d.code
-        course.appendChild(option)
-    }
-}
 </script>
 
 {% endblock script %}
@@ -46,13 +21,13 @@ async function getCourse(){
 
     <p>
         {% if course.outline %}
-        <a href="{% url "course.outlone.url" %}" download="{{course.title}} {{course.code}} outline">Click to download course outline</a>
+        <a href="{{course.outline.url}}" download>Download course outline</a>
         {% else %}
-        Course outline not available  <a href="">Click to add</a>
+        Course outline not available  <a href="{% url "upload_outline" course.id %}">Click to add</a>
         {% endif %}
     </p>
     <div class="hr"></div>
-    <p><b>Note:</b> anyone can flag an issue if you found anything that's not alright concerning the above course, <a href="">Flag issue</a></p>
+    <p><b>Note:</b> anyone can flag an issue if you found anything that's not alright concerning the above course, <a href="{% url "flag_course" course.id %}">Flag issue</a></p>
       <div class="hr"></div>
     {% include "app/libs/comments.html"  with next="courses?" course=course %}
     {% else %}

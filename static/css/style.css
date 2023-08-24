@@ -97,57 +97,16 @@ header nav{
         }
 
 .hero{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+    height: 350px;
     gap: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .hero > div{
-    padding: 15px 10px;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: space-around;
-   
     width: 100%;
 }
-.hero div.nbr{
-display: flex;
-justify-content: space-between;
-    flex-direction: row;
-}
-.hero > div > p{
-    height: 100%;
-    flex: 1;
-}
-.hero > div:nth-child(even){
-    background-color: white;
-     border: .5px solid gray;
-}
-.hero figure {
-    width: 50%;
-    margin: 0;
-}
-.hero img{ 
-    width: 100%;
-    object-fit: contain;
-}
-.button-links {
-    display: flex;
-    
-}
-.button-links a {
-    padding: 10px;
-    color: white;
-    background-color: #1877f2;
-    text-decoration: none;
-    margin: 10px 0;
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    border-radius: 5px;
-    
-}
+
 
 footer{
     border-top: .5px solid lightgray;
@@ -207,7 +166,7 @@ footer .form-div label{
     border: .5px solid lightgray;
     border-radius: 4px;
     outline: none;
-    font-size: 10px;
+    font-size: 13px;
     background: white;
     resize: none;
     flex: 1;
@@ -233,15 +192,36 @@ section p{
     margin: 5px 0;
 }
 
+.messages-section{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.messages-section .message{
+    border: 1.5px solid lightgray;
+    border-radius: 5px;
+    padding: 10px;
+}
+.message.success{
+    border-color: #15ff77;
+}
+.message.error{
+    border-color: #ff4040;
+}
+.message.info{
+    border-color: #8098ff;
+}
   .material-card {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
             gap: 5px;
             
+            
         }
         .material {
             border: .5px solid lightgray;
             border-radius: 4px;
             padding: 10px;
+            margin: 3px 0;
     }

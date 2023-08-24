@@ -1,7 +1,8 @@
 # app/models.py
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
 
 class Department(models.Model):
@@ -40,30 +41,19 @@ class TimeTable(models.Model):
     department = models.ForeignKey("Department", on_delete=models.CASCADE)
     level = models.CharField(max_length=3)
     original = models.FileField(upload_to="timetable/org/")
-    modified = models.FileField(upload_to="timetable/mod/")
+    modified = models.FileField(upload_to="timetable/mod/", null=True)
     
     
 class Course(models.Model):
     code = models.CharField(max_length=8)
     title = models.CharField(max_length=50)
     info = models.TextField()
-    outline = models.FileField(upload_to="courses/outlines/")
+    outline = models.FileField(upload_to="courses/outlines/", null=True)
     department = models.ForeignKey("Department", on_delete=models.CASCADE)
     
     def comments_set(self):
         return self.comments.all().order_by("-posted_on")[:10]
     
-    
-class Outline(models.Model):
-    lecturer = models.TextField()
-    topics = models.ManyToManyField("Topic", blank=False)
-    cu = models.IntegerField(default=2)
-    
-    
-class Topic(models.Model):
-    title = models.CharField(max_length = 100)
-    note = models.TextField()
-    sub_topics = models.ManyToManyField("Topic", blank=True)
 
 class BlogBase(models.Model):
     author = models.ForeignKey(User, on_delete = models.CASCADE)
@@ -84,3 +74,19 @@ class CourseComment(models.Model):
     comment = models.TextField()
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="comments")
     posted_on = models.DateTimeField(auto_now_add=True)
+    
+    
+    
+class FlaggedIssue(models.Model):
+    response = models.TextField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    issued_object = GenericForeignKey('content_type', 'object_id')
+
+    def __str__(self):
+        return self.tag
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["content_type", "object_id"]),
+        ]
