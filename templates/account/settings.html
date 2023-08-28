@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section><h1>Account settings</h1></section>
+<section>
+    <h2>User settings</h2>
+    <div class="form-div">
+        <form method="post" action="{% url "update_user" %}">
+            {% csrf_token %}
+        <label>Email <input type="email" value="{{user.email}}" disabled></label>
+        <label>First name
+        <input type="text" value="{{user.first_name}}" name="first_name">
+        </label>
+        <label>Last name's
+        <input type="text" value="{{user.last_name}}" name="last_name">
+        </label>
+        <button class="submit-btn">save</button>
+        </form>
+    </div>
+</section>
+<div class="hr"></div>
+<section>
+    <h2>Subscription</h2>
+    <div class="form-div">
+        <div class="subscription-div">
+            {% for plan in plans %}
+            <div class="subscription st">
+                <h3>{{plan.name}} = ₦{{plan.price}}</h3>
+                <ul>
+                    {% for f in plan.features_list %}
+                    <li>{{f}}</li>
+                    {% endfor %}
+                    
+                </ul>
+            </div>
+            {% endfor %}
+          
+            <p>All this plans are monthly dues</p>
+        </div>
+        <form method="post" action="{% url "subscription" %}">
+               {% csrf_token %}
+            <label>Current Plan
+            <select name="plan">
+                {% for plan in plans %}
+                <option value="{{plan.id}}" {% if plan.id == user.plan.type.id %}selected{% endif %}>{{plan.name}}</option>
+                {% endfor %}
+              
+            </select>
+            </label>
+            <button class="submit-btn">Check out</button>
+        </form>
+    </div>
+</section>
+<div class="hr"></div>
+<section>
+    <h2 style="color:red;">Delete Account</h2>
+    <form class="form-div" method="post" action="{% url "delete_account" %}">
+        {% csrf_token %}
+        <label>Enter your Password
+        <input type="password" name="password">
+        <button class="submit-btn" style="background: red; padding: 10px; ">Delete</button></label>
+    </form>
+</section>
+{% endblock content %}

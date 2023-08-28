@@ -136,6 +136,19 @@ def flag_course(request, cid):
         issue = FlaggedIssue(response=response, issued_object=course)
         issue.save()
         context["flag_id"] = issue.id
-        messages.info(request, "Issue reported successful.")
+        messages.info(request, "Issue is reported successful.")
+        
+    return render(request, "app/flag_course.html", context)
+    
+def flag_material(request, mid):
+    material = Material.objects.get(id = mid)
+    context = {}
+    if request.method == "POST":
+        response = request.POST.get("response")
+        
+        issue = FlaggedIssue(response=response, issued_object=material)
+        issue.save()
+        context["flag_id"] = issue.id
+        messages.info(request, "Issue is reported successful.")
         
     return render(request, "app/flag_course.html", context)

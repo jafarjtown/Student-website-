@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    <h1>User Creation form</h1>
+</section>
+<div class="form-div">
+        <form method="post">
+        {% csrf_token %}
+        <label>
+            Email
+            <input type="email" name="email" required>
+        </label>
+        <label>
+            Full name
+            <input type="text" name="full_name" required>
+        </label>
+        <label>
+            Password 
+            <input type="password" name="password" required>
+        </label>
+        
+        <label><div>
+           <input type="checkbox" required> Agreed on <a href="">Terms and Services</a></div>
+        
+        </label>
+        <p>Old user? <a href="{% url "user_login" %}">Login</a></p>
+        
+        
+        <button class="submit-btn">Register</button>
+        </form>
+        
+    </div>
+{% endblock content %}

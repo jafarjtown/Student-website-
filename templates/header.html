@@ -2,26 +2,35 @@
 <header>
     <div>
         <h2><img src="{% static "imgs/archive.png" %}" alt=""> Archive</h2>
-        <div class="hamburger" onclick="toggleNav()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <button class="hamburger" onclick="toggleNav()">
+                <img src="{% static "imgs/menu.png" %}" alt="">
+        </button>
         <nav class="hidden" nav>
            
             <div class="nav">
-            <div class="hamburger" onclick="toggleNav()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button class="hamburger" onclick="toggleNav()">
+                <img src="{% static "imgs/menu.png" %}" alt="">
+            </button>
+            {% if user.is_authenticated %}
+            <p>{{user.email}}</p>
+            {% endif %}
             <a href="/">Home</a>
             <a href="{% url "material_list" %}">Materials</a>
             <a href="{% url "upload" %}">Upload</a>
             <a href="{% url "course" %}">Courses</a>
-            <a href="/">Log in</a>
+            {% if user.is_authenticated %}
+            <a href="{% url "account_settings" %}">Account setting</a>
+            <a href="{% url "make_request" %}">make a request</a>
+            {% else %}
+            <a href="{% url "user_login" %}">Log in</a>
+            {% endif %}
             </div>
         </nav>
     </div>
-    <a href="{% url "search" %}">Search</a>
+    <div class="header-links">
+        <a href="{% url "search" %}">Search </a>
+        <a href="{% url "user_login" %}">
+        <img src="{% static "imgs/log-in.png" %}" alt=""></a>
+    </div>
+    
 </header>

@@ -3,7 +3,7 @@
     {% for message in messages %}
     <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
         <h4>{% if message.tags %}
-        {{ message.tags }}
+        {{ message.tags|title }}
         {% else %}
         Prompt
         {% endif %}</h4>

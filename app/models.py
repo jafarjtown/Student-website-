@@ -24,15 +24,18 @@ class Material(models.Model):
                         "audio":["mp3", "mpeg"],
                         "video":["mp4"],
                         "pdf":["pdf", "docx"],
+                        "img": ["jpg" "jpeg", "png"]
         }
         mime_type, _ = mimetypes.guess_type(self.file.name)
         if mime_type:
             main_type, sub_type = mime_type.split('/')
-            for k, v in types.items():
-                if sub_type in v:
-                    return k
-            return sub_type
-        return "unknown"
+            return main_type
+            #for k, v in types.items():
+#                print(sub_type, main_type)
+#                if sub_type in v:
+#                    return k
+#            return "files"
+        return "files"
     @property
     def code(self):
         return self.course.code

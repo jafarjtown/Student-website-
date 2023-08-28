@@ -2,6 +2,7 @@
     font-family: Arial, sans-serif;
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 :root{
     --primary-color: #55acff;
@@ -33,8 +34,8 @@ header > div{
 header h2{
     text-align: center;
 }
-header h2 img, footer h2 img{
-    height: 20px;
+header h2 img, footer h2 img, header .hamburger img{
+    height: 35px;
     background-color: white;
     padding: 5px;
     border-radius: 4px;
@@ -43,33 +44,53 @@ header nav.hidden{
     display: none;
 }
 header .hamburger{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 5px;
-    height: fit-content;
-    border-radius: 3px;
-}
-header .hamburger span{
-    width: 30px;
-    height: 5px;
+    border: none;
+    border-radius: 5px; 
     background-color: white;
-    border-radius: 3px;
+    text-align: end;
 }
-header > a{
+header .hamburger img{
+    height: 35px;
+    object-fit: contain;
+}
+header .header-links{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: center;
+}
+header .header-links a{
+    
+    text-align: center;
+    display: flex;
+    align-items: center;
+    
+}
+header .header-links a:first-of-type{
     padding: 10px;
     background-color: var(--primary-color);
-    text-align: center;
-    text-decoration: none;
     color: white;
-    font-size: 20px;
+    font-size: 17px;
     border-radius: 4px;
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: 1px;
+    flex: 1;
+    justify-content: center;
+}
+header .header-links a img{
+    height: 35px;
+    background-color: white;
+    border-radius: 4px;
+    padding: 7px;
+}
+header > a{
+    height: 25px;
+    margin: 0 5px;
 }
 
 header nav{
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     background-color: #d9d9d9b8;
@@ -78,7 +99,9 @@ header nav{
     display: flex;
     flex-direction: row-reverse;
 }
-
+.nav p{
+    color: black !important ;
+}
 .nav{
     display: flex;
     flex-direction: column;
@@ -93,7 +116,7 @@ header nav{
 .nav a{
     font-weight: bold;
     color: black;
-    font-size: 23px;
+    font-size: 17px;
     border: .5px solid lightgray;
     padding: 10px;
     border-radius: 4px;
@@ -209,6 +232,10 @@ footer .form-div label{
     display: flex;
     gap: 5px;
 }
+.form-div h1 img{
+    height: 25px;
+    margin: auto 5px;
+}
 .form-div label{
     flex: 1;
     display: flex;
@@ -303,3 +330,36 @@ section p{
             padding: 10px;
             margin: 3px 0;
     }
+
+.subscription-div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+.subscription{
+    border: 3px solid;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.subscription.st{
+    background-color: black;
+    color: white;
+    border-color: var(--primary-color);
+}
+.subscription.sc{
+    background-color: var(--primary-color);
+    color: white;
+    border: 3px solid black;
+}
+subscription.pr{
+    
+}
+.subscription ul{
+    padding: 3px 20px;
+}
+.subscription li{
+    margin: 2px;
+}

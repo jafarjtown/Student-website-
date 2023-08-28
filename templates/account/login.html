@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+    <h1>User Login form</h1>
+</section>
+<div class="form-div">
+        <form method="post">
+        {% csrf_token %}
+        <label>
+            Email
+            <input type="email" name="email" required>
+        </label>
+        <label>
+            Password 
+            <input type="password" name="password" required>
+        </label>
+        <p>New user? <a href="{% url "user_register" %}">Register</a> or Forgotten password <a href="">Reset</a></p>
+        
+        <button class="submit-btn">Login</button>
+        </form>
+        
+    </div>
+{% endblock content %}

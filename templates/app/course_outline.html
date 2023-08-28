@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<section>
+     <h1>Course outline form</h1>
+</section>
 <div class="form-div">
-    <p>{{course.code}} - {{course.title}} <a href="{% url "course" %}?department={{course.department.id}}&course={{course.code}}">Details</a></p>
+    <p>{{course.title}}</p>
+    <p>{{course.code}} - <a href="{% url "course" %}?department={{course.department.id}}&course={{course.code}}">Details</a></p>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <label>

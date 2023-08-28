@@ -39,12 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     "app",
+    "user_account",
     
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-   'whitenoise.middleware.WhiteNoiseMiddleware', 
+  # 'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

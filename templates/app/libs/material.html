@@ -23,7 +23,8 @@
             
            
             
-            <a class="download-button" href="{{ material.file.url }}">View</a>
+            <a class="download-button" href="{{ material.file.url }}"><img src="{% static "imgs/view.png" %}" alt="download" loading="lazy"/></a>
+            <a class="download-button" href="{% url "flag_material" material.id %}"><img src="{% static "imgs/issue.png" %}" alt="download" loading="lazy"/></a>
             
             </div>
         </div>

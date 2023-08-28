@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 
 <div class="form-div">
-    
-    <p>Creating a flag issue on Course with the title "{{course.titlw}}" and code of "{{course.code}}"</p>
+    <h1>Flag <img src="{% static "imgs/issue.png" %}" alt=""></h1>
+    <p>Creating a flag issue</p>
     {% if flag_id %}
     <p>Flag is submitted, <a href="">track</a></p>
     {% endif %}

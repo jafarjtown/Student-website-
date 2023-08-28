@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<section>
+    <h1>Make a request</h1>
+    <p>Request can be made when you want a particular document, timetable, handout, want to complain or give a suggestion.</p>
+</section>
+<div class="form-div">
+    <form>
+        <label>
+            Topic
+            <input type="text" name="topic">
+        </label>
+        <label>
+            Request
+            <textarea name="request" rows="5"></textarea>
+        </label>
+        <label>
+            Priority
+            <select>
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+            </select>
+        </label>
+        <label>
+            Type
+            <select>
+                <option>Suggestions</option>
+                <option>Complain</option>
+                <option>Requesting</option>
+            </select>
+        </label>
+     
+        
+        <button class="submit-btn">make the request</button>
+    </form>
+</div>
+
+{% endblock content %}

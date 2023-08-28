@@ -15,5 +15,6 @@ urlpatterns = [
         path("courses/", views.courses, name="course"),
         path("courses/<int:cid>/outline", views.upload_outline, name="upload_outline"),
         path("courses/<int:cid>/flag-issue", views.flag_course, name="flag_course"),
+        path("materials/<int:mid>/flag-issue", views.flag_material, name="flag_material"),
 
 ]
