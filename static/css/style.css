@@ -20,7 +20,8 @@ p{
 header{
     display: flex;
     flex-direction: column;
-    padding: 15px 10px 5px 10px;
+    padding: 15px 10px 25px 10px;
+    
     gap: 5px;
     background-color: black;
 }
@@ -122,9 +123,14 @@ header nav{
     border-radius: 4px;
     background: white;
 }
+main{
+    padding: 2px 30px;
+}
         /* Mobile navigation */
         @media (max-width: 768px) {
-            .,
+            main{
+                padding: 0;
+            }
             .hero div.br{
                 flex-direction: column;
             }
@@ -278,11 +284,15 @@ section p{
     display: flex;
     flex-direction: column;
     gap: 5px;
+    position: fixed;
+    top: 0;
 }
+
 .messages-section .message{
     border: 1.5px solid lightgray;
     border-radius: 5px;
     padding: 10px;
+    background-color: white;
 }
 .message.success{
     border-color: #15ff77;
@@ -362,4 +372,29 @@ subscription.pr{
 }
 .subscription li{
     margin: 2px;
+}
+.sponsors{
+    display: flex;
+    gap: 5px;
+}
+.sponsors > div{
+    display: flex;
+    flex-direction: column;
+    gap:2px;
+    position: relative;
+}
+.sponsors img{
+    max-width: 500px;
+    width: 100%;
+    object-fit: contain;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+.sponsors small{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000000b9;
+    padding: 10px;
 }

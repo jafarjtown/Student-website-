@@ -8,30 +8,35 @@
     <p>Request can be made when you want a particular document, timetable, handout, want to complain or give a suggestion.</p>
 </section>
 <div class="form-div">
-    <form>
+    <form method="post">
+        {% csrf_token %}
         <label>
             Topic
-            <input type="text" name="topic">
+            <input type="text" name="topic" required>
         </label>
         <label>
             Request
-            <textarea name="request" rows="5"></textarea>
+            <textarea name="request" rows="5" required></textarea>
         </label>
         <label>
             Priority
-            <select>
-                <option>Low</option>
-                <option>Medium</option>
-                <option>High</option>
+            <select name="priority">
+                <option value="0">Low</option>
+                <option value="1">Medium</option>
+                <option value="2">High</option>
             </select>
         </label>
         <label>
             Type
-            <select>
+            <select name="type">
                 <option>Suggestions</option>
                 <option>Complain</option>
                 <option>Requesting</option>
             </select>
+        </label>
+        <label>Optional email
+        <input type="email" value="{{user.email}}" name="email" required>
+        <small>We will notify you through this email when your request is attended</small>
         </label>
      
         

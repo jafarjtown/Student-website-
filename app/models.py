@@ -4,9 +4,25 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 import mimetypes
+
+
+
 def materials_directory_path(instance, filename):
     
     return f"materials/{instance.department.name}/{instance.code}/{filename}"
+
+def material_name(instance):
+    return instance.file.name
+class Newsletter(models.Model):
+    email = models.EmailField(unique=True)
+    activate = models.BooleanField(default=True)
+
+class Request(models.Model):
+    body = models.TextField()
+    topic = models.CharField(max_length=50)
+    priority = models.IntegerField(default=0)
+    type = models.CharField(max_length=15)
+    email = models.EmailField(blank=True)
 
 
 class Department(models.Model):
@@ -14,35 +30,24 @@ class Department(models.Model):
     slogan = models.TextField()
 
 class Material(models.Model):
+    title= models.CharField(max_length=200, default="")
     course = models.ForeignKey("Course", on_delete=models.CASCADE)
     file = models.FileField(upload_to=materials_directory_path)
     comment= models.TextField()
+    upload_on = models.DateTimeField(auto_now_add=True)
     
     @property
     def type(self):
-        types = {
-                        "audio":["mp3", "mpeg"],
-                        "video":["mp4"],
-                        "pdf":["pdf", "docx"],
-                        "img": ["jpg" "jpeg", "png"]
-        }
+        
         mime_type, _ = mimetypes.guess_type(self.file.name)
         if mime_type:
             main_type, sub_type = mime_type.split('/')
             return main_type
-            #for k, v in types.items():
-#                print(sub_type, main_type)
-#                if sub_type in v:
-#                    return k
-#            return "files"
         return "files"
     @property
     def code(self):
         return self.course.code
     
-    @property
-    def title(self):
-        return self.course.title
     @property
     def department(self):
         return self.course.department
@@ -73,6 +78,7 @@ class Course(models.Model):
     info = models.TextField()
     outline = models.FileField(upload_to="courses/outlines/", null=True)
     department = models.ForeignKey("Department", on_delete=models.CASCADE)
+    level = models.IntegerField(default=100)
     
     def comments_set(self):
         return self.comments.all().order_by("-posted_on")[:10]

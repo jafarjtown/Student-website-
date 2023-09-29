@@ -1,10 +1,16 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Account, User, Plan, PlanType
+from app.models import Request 
 from django.utils import timezone
 from datetime import datetime
 
+
+#Logout view
+def user_logout(request):
+    logout(request)
+    return redirect("/")
 # Login view
 def user_login(request):
     if request.method == "POST":
@@ -89,6 +95,16 @@ def delete_account(request):
 
 # Other views: make_request, update_user - no changes made
 def make_request(request):
+    if request.method == "POST":
+        post = request.POST
+        req = Request()
+        req.body = post.get("request")
+        req.topic = post.get("topic")
+        req.priority = post.get("priority")
+        req.type = post.get("type")
+        req.email = post.get("email")
+        req.save()
+        messages.success(request,"Request is submitted")
     return render(request, "account/request.html")
 
 def update_user(request):

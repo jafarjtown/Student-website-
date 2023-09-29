@@ -5,7 +5,7 @@
         <div>
             <label> Department:
             <select name="department" department>
-                <option>--Select Department--</option>
+                <option value="null">--Select Department--</option>
                 {% for d in departments %}
                 <option value="{{d.id}}" {% if d.id == department %}
                 selected
@@ -15,7 +15,7 @@
             </label>
             <label> Level:
             <select name="level" level>
-                <option>--Select Level--</option>
+                <option value="null">--Select Level--</option>
                 {% for l in levels %}
                 <option value="{{l}}" {% if l == level %}selected
                 {% endif %}>{{l}} Level</option>
@@ -26,9 +26,17 @@
         <div>
             <label> Course :
             <select name="course" course>
-                <option>--Select Course--</option>
+                <option value="null">--Select Course--</option>
             </select>
             </label>
+            {% if sort %}
+            <label> Sort :
+            <select name="sort">
+                <option value="a">Ascending</option>
+                <option value="d">Descending</option>
+            </select>
+            </label>
+            {% endif %}
             
         </div>
          <div>

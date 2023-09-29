@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block content %}
 <section>
     <h1>Resources page</h1>
 </section>
-{% include "app/libs/filter.html" with department=department departments=departments levels=levels btn="Filter" %}
+{% include "app/libs/filter.html" with department=department departments=departments levels=levels btn="Filter" sort=True %}
 <section>
     {% if course %}
         <h3>{{course.code}}</h3>

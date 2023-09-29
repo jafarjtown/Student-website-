@@ -18,9 +18,10 @@
             <a href="{% url "material_list" %}">Materials</a>
             <a href="{% url "upload" %}">Upload</a>
             <a href="{% url "course" %}">Courses</a>
+            <a href="{% url "make_request" %}">make a request</a>
             {% if user.is_authenticated %}
             <a href="{% url "account_settings" %}">Account setting</a>
-            <a href="{% url "make_request" %}">make a request</a>
+            <a href="{% url "user_logout" %}">Log out</a>
             {% else %}
             <a href="{% url "user_login" %}">Log in</a>
             {% endif %}
