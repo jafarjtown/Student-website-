@@ -26,6 +26,8 @@ def user_login(request):
 
 # Registration view
 def user_register(request):
+    messages.info(request, "Sorry no registration can be done now.\nTo create an Account contact administrator.")
+    return redirect("index")
     if request.method == "POST":
         email = request.POST.get("email")
         full_name = request.POST.get("full_name")

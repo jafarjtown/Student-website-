@@ -2,6 +2,7 @@
 from django.shortcuts import render,redirect
 from django.http import JsonResponse 
 from .models import Material, Department , Course, TimeTable, CourseComment , FlaggedIssue, Newsletter
+from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 
@@ -10,7 +11,8 @@ from user_account.email import send_email_message
 
 def index(request):
     return render(request, 'app/index.html')
-    
+ 
+@login_required   
 def upload(request):
     context = {
             "departments": Department.objects.all()
@@ -100,7 +102,6 @@ def timetable(request, id):
     
     
 def courses(request):
-
     context = {"departments": Department.objects.all(), "levels":[100, 200,300,400]}
     if request.GET.get("department") and request.GET.get("course"):
         department = int(request.GET.get("department"))
